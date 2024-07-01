@@ -18,6 +18,8 @@ namespace IntroduccionAEFCore
             SeedingInicial.Seed(modelBuilder);
         }
 
+        // sirve para configurar convenciones en tipos de datos. Example: para strings, utilizar nvarchar 150
+        // si una configuracion particular de entidad dice otra cosa, se toma la config especifica y no la global
         protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
         {
             configurationBuilder.Properties<string>().HaveMaxLength(150);

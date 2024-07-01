@@ -4,6 +4,7 @@ using System.Reflection.Emit;
 
 namespace IntroduccionAEFCore.Entidades.Configuraciones
 {
+    // se implementa una interfaz que tiene un metodo para configurar la api fleunte de una entidad
     public class ActorConfig : IEntityTypeConfiguration<Actor>
     {
         public void Configure(EntityTypeBuilder<Actor> builder)
