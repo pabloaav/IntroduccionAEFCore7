@@ -53,7 +53,7 @@ namespace IntroduccionAEFCore.Controllers
             await context.SaveChangesAsync();
             return Ok();
         }
-S
+
         [HttpPut("{id:int}/nombre2")]
         public async Task<ActionResult> Put(int id)
         {
