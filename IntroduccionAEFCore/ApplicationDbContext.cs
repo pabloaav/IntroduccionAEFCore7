@@ -14,7 +14,9 @@ namespace IntroduccionAEFCore
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            // buscar todas las IEntityTypeConfiguration del proyecto y las aplica
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+            // hacer el seeding llamando a la calse correspondiente con el metodo Seed
             SeedingInicial.Seed(modelBuilder);
         }
 

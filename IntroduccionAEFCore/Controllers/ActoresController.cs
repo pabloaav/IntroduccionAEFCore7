@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace IntroduccionAEFCore.Controllers
 {
+    // aqui decimos que todas las rutas va a tener como raiz: api/actores
     [ApiController]
     [Route("api/actores")]
     public class ActoresController: ControllerBase
@@ -26,6 +27,7 @@ namespace IntroduccionAEFCore.Controllers
             return await context.Actores.OrderByDescending(a => a.FechaNacimiento).ToListAsync();
         }
 
+        // la ruta: api/actores/nombres
         [HttpGet("nombre")]
         public async Task<ActionResult<IEnumerable<Actor>>> Get(string nombre)
         {
@@ -66,9 +68,13 @@ namespace IntroduccionAEFCore.Controllers
             return actor;
         }
 
+        // para traer solo algunas columnas se usa el Select
         [HttpGet("idynombre")]
         public async Task<ActionResult<IEnumerable<ActorDTO>>> Getidynombre()
         {
+            // Para proyectar a un tipo anonimo
+            //var actores = await context.Actores.Select( a => new { Id = a.Id, Nombre = a.Nombre }).ToListAsync();
+            // Para proyectar a una clase se usa un DTO response
             return await context.Actores
                 .ProjectTo<ActorDTO>(mapper.ConfigurationProvider)
                 .ToListAsync();

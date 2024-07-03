@@ -22,6 +22,7 @@ namespace IntroduccionAEFCore.Controllers
         public async Task<ActionResult> Post(int peliculaId, 
             ComentarioCreacionDTO comentarioCreacionDTO)
         {
+            // en las relaciones uno a muchos se necesita el id de la clave foranea de la relacion uno
             var comentario = mapper.Map<Comentario>(comentarioCreacionDTO);
             comentario.PeliculaId = peliculaId;
             context.Add(comentario);

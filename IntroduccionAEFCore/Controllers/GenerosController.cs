@@ -29,7 +29,7 @@ namespace IntroduccionAEFCore.Controllers
         [HttpPost]
         public async Task<ActionResult> Post(GeneroCreacionDTO generoCreacion)
         {
-
+            // en el caso de columnas unique, se verifica antes de insertar que no exista un registro con clave duplicada
             var yaExisteGeneroConEsteNombre = await context.Generos.AnyAsync(g =>
             g.Nombre == generoCreacion.Nombre);
 
@@ -44,15 +44,16 @@ namespace IntroduccionAEFCore.Controllers
             return Ok();
         }
 
+        // el nombre "varios" es el de la ruta o el de la url
         [HttpPost("varios")]
         public async Task<ActionResult> Post(GeneroCreacionDTO[] generosCreacionDTO)
         {
             var generos = mapper.Map<Genero[]>(generosCreacionDTO);
-            context.AddRange(generos);
+            context.AddRange(generos); // agregar muchos objetos relacionados
             await context.SaveChangesAsync();
             return Ok();
         }
-
+S
         [HttpPut("{id:int}/nombre2")]
         public async Task<ActionResult> Put(int id)
         {

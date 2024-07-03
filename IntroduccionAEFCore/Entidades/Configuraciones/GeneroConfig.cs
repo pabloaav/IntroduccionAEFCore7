@@ -10,7 +10,7 @@ namespace IntroduccionAEFCore.Entidades.Configuraciones
             var cienciaFiccion = new Genero { Id = 5, Nombre = "Ciencia Ficción" };
             var animacion = new Genero { Id = 6, Nombre = "Animación" };
             builder.HasData(cienciaFiccion, animacion);
-
+            // Agregar un indice Unico en la tabla
             builder.HasIndex(p => p.Nombre).IsUnique();
         }
     }

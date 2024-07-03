@@ -6,6 +6,6 @@ namespace IntroduccionAEFCore.Entidades
     {
         public int Id { get; set; }
         public string Nombre { get; set; } = null!;
-        public HashSet<Pelicula> Peliculas { get; set; } = new HashSet<Pelicula>();
+        public HashSet<Pelicula> Peliculas { get; set; } = new HashSet<Pelicula>(); // muchos generos tienen muchas peliculas. HashSet son colecciones
     }
 }

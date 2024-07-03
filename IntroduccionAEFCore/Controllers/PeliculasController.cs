@@ -18,7 +18,7 @@ namespace IntroduccionAEFCore.Controllers
             this.context = context;
             this.mapper = mapper;
         }
-
+        // con Eager Loanding
         [HttpGet("{id:int}")]
         public async Task<ActionResult<Pelicula>> Get(int id)
         {
@@ -36,7 +36,7 @@ namespace IntroduccionAEFCore.Controllers
 
             return pelicula;
         }
-
+        // Select Loading. Se selecciona solamente los atributos deseados de cada objeto
         [HttpGet("select/{id:int}")]
         public async Task<ActionResult> GetSelect(int id)
         {
@@ -68,15 +68,16 @@ namespace IntroduccionAEFCore.Controllers
         public async Task<ActionResult> Post(PeliculaCreacionDTO peliculaCreacionDTO)
         {
             var pelicula = mapper.Map<Pelicula>(peliculaCreacionDTO);
-
+            // esto se hace en relaciones directas entre muchos a muchos
             if (pelicula.Generos is not null)
             {
                 foreach (var genero in pelicula.Generos)
                 {
+                    // EFC hace seguimiento de los objetos. se debe indicar que el estado es unchanged para decir que no debe agregar ni modificar dicho objeto
                     context.Entry(genero).State = EntityState.Unchanged;
                 }
             }
-
+            // para relaciones indirectas se usa lo siguinte
             if (pelicula.PeliculasActores is not null)
             {
                 for (int i = 0; i < pelicula.PeliculasActores.Count; i++)
@@ -84,12 +85,13 @@ namespace IntroduccionAEFCore.Controllers
                     pelicula.PeliculasActores[i].Orden = i + 1;
                 }
             }
-
+            // EFC agrega los objetos relacionados automaticamente
             context.Add(pelicula);
             await context.SaveChangesAsync();
             return Ok();
         }
 
+        // Est borra la pelicula y las entidades relacionadas. Hace un delete en cascada
         [HttpDelete("{id:int}/moderna")]
         public async Task<ActionResult> Delete(int id)
         {

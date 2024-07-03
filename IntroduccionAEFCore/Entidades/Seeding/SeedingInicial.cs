@@ -69,7 +69,7 @@ namespace IntroduccionAEFCore.Entidades.Seeding
             modelBuilder.Entity<Comentario>().HasData(comentarioAvengers, comentarioAvengers2, comentarioNWH);
 
             // muchos a muchos con salto (esto es poquito avanzado)
-
+            // lo siguiente es una tabla intermedia, en la configuracion d esalto en muchos a muchos
             var tablaGeneroPelicula = "GeneroPelicula";
             var generoIdPropiedad = "GenerosId";
             var peliculaIdPropiedad = "PeliculasId";
@@ -77,6 +77,7 @@ namespace IntroduccionAEFCore.Entidades.Seeding
             var cienciaFiccion = 5;
             var animacion = 6;
 
+            // para crear un registro en la tabla intermedia se debe hacer de manera taxativa mediante un diccionario
             modelBuilder.Entity(tablaGeneroPelicula).HasData(
                 new Dictionary<string, object>
                 {
